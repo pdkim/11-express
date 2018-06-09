@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/pdkim/09-rest-persistence#readme",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "jest": "^23.1.0",
     "lint": "^1.1.2",
     "start": "^5.1.0"
