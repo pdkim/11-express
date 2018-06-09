@@ -25,6 +25,9 @@ module.exports = {
   },
 
   stop: () => {
-    
-  }
-}
+    app.close( () => {
+      alreadyRunning = false;
+      console.log('Server is closed');
+    });
+  },
+};
