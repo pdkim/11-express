@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('../lib/router.js');
-const Notes = require('../models/notes.js');
+const Notes = require('../lib/models/notes.js');
 
 /**
  * Simple method to send a JSON response (all of the API methods will use this)

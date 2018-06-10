@@ -6,7 +6,7 @@ const router = module.exports = {};
 
 router.routes = {};
 
-const methods = {};
+const methods = ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'];
 
 methods.forEach((method) => {
   

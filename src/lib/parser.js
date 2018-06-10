@@ -1,7 +1,7 @@
 'use strict';
 
 const url = require('url');
-const queryString = require('querySting');
+const queryString = require('querystring');
 
 module.exports = (req) => {
 
@@ -13,7 +13,7 @@ module.exports = (req) => {
 
     req.query = queryString.parse(req.parsed.query);
 
-    if(! req.mehtod.match(/POST|PUT|PATCH/)) {
+    if(! req.method.match(/POST|PUT|PATCH/)) {
       resolve(req);
     }
 
