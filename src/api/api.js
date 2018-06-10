@@ -31,7 +31,7 @@ let serverError = (res, err) => {
 
 //GET
 router.get('/api/v1/persist', (req, res) => {
-  if(req.query.id === '') {
+  if (req.query.id === '') {
     res.statusCode = 404;
     res.statusMessage = 'Bad Request';
     res.write('Bad Request');
@@ -50,26 +50,28 @@ router.get('/api/v1/persist', (req, res) => {
 });
 
 //DELETE
-router.delete('/api/v1/persist', (req,res) => {
-  if ( req.query.id ) {
+router.delete('/api/v1/persist', (req, res) => {
+  if (req.query.id) {
     Notes.deleteOne(req.query.id)
-      .then( success => {
-        let data = {id:req.query.id,deleted:success};
-        sendJSON(res,data);
+      .then(() => {
+        res.statusCode = 204;
+        res.statusMessage = 'OK';
+        res.end();
       })
       .catch(serverError(res, err));
   }
 });
 
 //POST
-router.post('/api/v1/persist', (req,res) => {
+router.post('/api/v1/persist', (req, res) => {
 
   let record = new Notes(req.body);
-  
-  record.save()
-    .then(data => sendJSON(res,data))
-    .catch(serverError(res, err));
 
+  record.save()
+    .then(data => sendJSON(res, data))
+    .catch(serverError(res, err));
 });
+
+
 
 module.exports = {};
