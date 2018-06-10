@@ -31,10 +31,10 @@ router.route = (req, res) => {
     })
     .catch(err => {
 
-      console.error('Not Found', req.parsed.pathname0);
-      res.statusCode = 404;
+      console.error('Not Found', req.parsed.pathname);
+      res.statusCode = 400;
       res.statusMessage = 'Not found';
-      res.write(`Resource Not Found (${req.parsed.pathname})`);
+      res.write(`Bad Reqeust`);
       res.end();
       
     });
