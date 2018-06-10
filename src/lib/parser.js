@@ -7,7 +7,9 @@ module.exports = (req) => {
 
   return new Promise((resolve, reject) => {
     
-    if(!(req || req.url)) {reject('Invalid Request Object.  Cannot Parse');}
+    if(!(req || req.url)) {
+      reject('Invalid Request Object.  Cannot Parse');
+    }
 
     req.parsed = url.parse(req.url);
 
