@@ -2,23 +2,23 @@
 
 let parser = require('../src/lib/parser.js');
 
-describe('URL Parser', () => {
+describe('the Parser', () => {
 
-  xit('requires a request object', () => {
+  it('needs a request object or will error out', () => {
     let req = undefined;
     return parser(req)
       .then(() => false)
       .catch(err => expect(err).toBeDefined());
   });
 
-  xit('requires a request object with a url', () => {
+  it('needs a request object with a url', () => {
     let req = {};
     return parser(req)
       .then(() => false)
       .catch(err => expect(err).toBeDefined());
   });
 
-  xit('returns object when given a url', () => {
+  it('will return the object when passed a url', () => {
     let req = { url: 'http://localhost' };
     return parser(req)
       .then(request => expect(typeof request.url).toEqual('object'))
@@ -26,7 +26,7 @@ describe('URL Parser', () => {
   });
 
 
-  xit('returns multiple content when passed', () => {
+  it('returns multiple content when passed', () => {
     let req = { method: 'GET', url: 'http://localhost?a=1&b=2' };
     return parser(req)
       .then(request => {
@@ -35,4 +35,4 @@ describe('URL Parser', () => {
       })
       .catch(console.error);
   });
-})
+});

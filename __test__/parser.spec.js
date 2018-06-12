@@ -4,20 +4,16 @@ let router = require('../src/lib/router.js');
 
 describe('Router', () => {
 
-  xit('regiesters multiple types of routes', () => {
+  it('can run multiple types of routes', () => {
     router.get('/', () => true);
-    router.put('/', () => true);
     router.post('/', () => true);
-    router.patch('/', () => true);
     router.delete('/', () => true);
     expect( router.routes.GET['/']).toBeDefined();
-    expect( router.routes.PUT['/']).toBeDefined();
     expect( router.routes.POST['/']).toBeDefined();
-    expect( router.routes.PATCH['/']).toBeDefined();
     expect( router.routes.DELETE['/']).toBeDefined();
   });
 
-  xit('creates multiple routes of same type', () => {
+  it('can retrieve multiple files at once', () => {
     router.routes.GET = {};
     router.get('/a', () => true);
     router.get('/b', () => true);
@@ -25,10 +21,10 @@ describe('Router', () => {
     expect( Object.keys(router.routes.GET).length ).toEqual(3);
   });
 
-  xit('can route get requests', () => {
-    let expected = 'get/test';
-    router.get('/test', () => expected);
-    let req = { method: 'GET', url: 'http://localhost/test?foobar' };
+  it('can route get requests', () => {
+    let expected = 'get/student';
+    router.get('/student', () => expected);
+    let req = { method: 'GET', url: 'http://localhost/student?id' };
     let res = {};
     return router.route(req,res)
       .then( result => expect(result).toEqual(expected));

@@ -31,7 +31,6 @@ let serverError = (res, err) => {
 
 //GET
 router.get('/api/v1/persist', (req, res) => {
-  // console.log(req.query.id);
   if (req.query.id === '' || !req.query.id) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
