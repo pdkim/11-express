@@ -1,5 +1,7 @@
-Travis:
-Heroku: 
+Travis: [![Build Status](https://travis-ci.com/pdkim/09-rest-persistence.svg?branch=pk09)](https://travis-ci.com/pdkim/09-rest-persistence)
+
+Heroku: https://pk-09-persistence.herokuapp.com/
+
 Github: https://github.com/pdkim/09-rest-persistence 
 
 Feature:
