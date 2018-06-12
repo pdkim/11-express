@@ -26,3 +26,10 @@ storage.save = (data) => {
     }
   });
 };
+
+storage.delete = (id) => {
+  return new Promise((resolve, reject) => {
+    if(database[id]) {resolve(delete database[id].id);}
+    else{reject(`${id} not found`);}
+  });
+};

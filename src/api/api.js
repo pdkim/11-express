@@ -31,7 +31,7 @@ let serverError = (res, err) => {
 
 //GET
 router.get('/api/v1/persist', (req, res) => {
-  console.log(req.query.id);
+  // console.log(req.query.id);
   if (req.query.id === '' || !req.query.id) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
@@ -52,14 +52,20 @@ router.get('/api/v1/persist', (req, res) => {
 
 //DELETE
 router.delete('/api/v1/persist', (req, res) => {
-  if (req.query.id) {
+  if (req.query.id === '' || !req.query.id) {
+    res.statusCode = 400;
+    res.statusMessage = 'Bad Request';
+    res.write('Bad Request');
+    res.end();
+  }
+  else {
     Notes.deleteOne(req.query.id)
       .then(() => {
         res.statusCode = 204;
         res.statusMessage = 'OK';
         res.end();
       })
-      .catch(serverError(res, err));
+      .catch(console.error);
   }
 });
 
@@ -70,7 +76,7 @@ router.post('/api/v1/persist', (req, res) => {
 
   record.save()
     .then(data => sendJSON(res, data))
-    .catch(serverError(res, err));
+    .catch(console.error);
 });
 
 

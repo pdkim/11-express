@@ -52,6 +52,7 @@ class Note {
   }
 
   static updateOne(criteria) {
+    console.log(criteria);
     return storage.update(this);
   }
 

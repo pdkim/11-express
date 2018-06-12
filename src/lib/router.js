@@ -27,14 +27,13 @@ router.route = (req, res) => {
       if(handler) {
         return handler(req, res);
       }
-
     })
     .catch(err => {
-
+      console.log(err);
       console.error('Not Found', req.parsed.pathname);
       res.statusCode = 400;
       res.statusMessage = 'Not found';
-      res.write(`Bad Reqeust`);
+      res.write(`test`);
       res.end();
       
     });
