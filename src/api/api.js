@@ -6,6 +6,8 @@ const router = express.Router();
 
 // const Notes = require('../lib/models/notes.js');
 import Notes from '../lib/models/notes.js';
+import Worker from '../lib/models/worker.js';
+import { worker } from 'cluster';
 
 
 /**
@@ -32,7 +34,14 @@ let serverError = (res, err) => {
 };
 
 
-//GET
+//GET all
+router.get('/api/v1/worker', (req, res) => {
+  Worker.fetchAll()
+    .then(data => sendJSON(res, data))
+    .catch(err => serverError(res, err));
+});
+
+//GET One
 router.get('/api/v1/persist', (req, res) => {
   if (req.query.id === '' || !req.query.id) {
     res.statusCode = 400;
@@ -41,12 +50,12 @@ router.get('/api/v1/persist', (req, res) => {
     res.end();
   }
   else if (req.query.id) {
-    Notes.findOne(req.query.id)
+    Worker.findOne(req.query.id)
       .then(data => sendJSON(res, data))
       .catch(err => serverError(res, err));
   }
   else {
-    Notes.fetchAll()
+    Worker.fetchAll()
       .then(data => sendJSON(res, data))
       .catch(err => serverError(res, err));
   }
@@ -61,7 +70,7 @@ router.delete('/api/v1/persist', (req, res) => {
     res.end();
   }
   else {
-    Notes.deleteOne(req.query.id)
+    Worker.deleteOne(req.query.id)
       .then(() => {
         res.statusCode = 204;
         res.statusMessage = 'OK';
@@ -74,7 +83,7 @@ router.delete('/api/v1/persist', (req, res) => {
 //POST
 router.post('/api/v1/persist', (req, res) => {
 
-  let record = new Notes(req.body);
+  let record = new Worker(req.body);
 
   record.save()
     .then(data => sendJSON(res, data))
