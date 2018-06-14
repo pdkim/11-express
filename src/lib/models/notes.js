@@ -1,9 +1,7 @@
 'use strict';
 
-// const storage = require('../storage/data-store.js');
 import storage from '../storage/data-store.js';
 
-//const uuid = require('uuid/v1');
 import uuid from 'uuid/v1';
 
 class Note {
@@ -48,5 +46,4 @@ class Note {
 
 }
 
-// module.exports = Note;
 export default Note;

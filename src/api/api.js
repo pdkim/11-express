@@ -1,13 +1,9 @@
 'use strict';
 
-//const router = require('../lib/router.js');
 import express from 'express';
 const router = express.Router();
 
-// const Notes = require('../lib/models/notes.js');
-import Notes from '../lib/models/notes.js';
 import Worker from '../lib/models/worker.js';
-import { worker } from 'cluster';
 
 
 /**
@@ -34,16 +30,9 @@ let serverError = (res, err) => {
 };
 
 
-//GET all
+//GET
 router.get('/api/v1/worker', (req, res) => {
-  Worker.fetchAll()
-    .then(data => sendJSON(res, data))
-    .catch(err => serverError(res, err));
-});
-
-//GET One
-router.get('/api/v1/persist', (req, res) => {
-  if (req.query.id === '' || !req.query.id) {
+  if (req.query.id === '') {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
     res.write('Bad Request');
@@ -62,7 +51,7 @@ router.get('/api/v1/persist', (req, res) => {
 });
 
 //DELETE
-router.delete('/api/v1/persist', (req, res) => {
+router.delete('/api/v1/worker', (req, res) => {
   if (req.query.id === '' || !req.query.id) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
@@ -81,7 +70,7 @@ router.delete('/api/v1/persist', (req, res) => {
 });
 
 //POST
-router.post('/api/v1/persist', (req, res) => {
+router.post('/api/v1/worker', (req, res) => {
 
   let record = new Worker(req.body);
 
@@ -91,6 +80,4 @@ router.post('/api/v1/persist', (req, res) => {
 });
 
 
-
-// module.exports = {};
 export default router;
