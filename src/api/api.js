@@ -1,16 +1,19 @@
 'use strict';
 
-const router = require('../lib/router.js');
-const Notes = require('../lib/models/notes.js');
+//const router = require('../lib/router.js');
+import express from 'express';
+const router = express.Router();
+
+// const Notes = require('../lib/models/notes.js');
+import Notes from '../lib/models/notes.js';
+
 
 /**
- * Simple method to send a JSON response (all of the API methods will use this)
  * @param res
  * @param data
  */
 
 
-//review from here on down for lab requirements
 let sendJSON = (res, data) => {
   res.statusCode = 200;
   res.statusMessage = 'ok';
@@ -80,4 +83,5 @@ router.post('/api/v1/persist', (req, res) => {
 
 
 
-module.exports = {};
+// module.exports = {};
+export default router;

@@ -1,8 +1,10 @@
 'use strict';
 
-const fs = require('fs');
+// const fs = require('fs');
+import fs from 'fs';
 
-const storage = module.exports = {};
+//const storage = module.exports = {};
+const storage = {};
 
 const dataDirectory = `${__dirname}/../../../data`;
 

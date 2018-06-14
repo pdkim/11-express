@@ -1,11 +1,13 @@
 'use strict';
 
-const storage = require('../storage/data-store.js');
-const uuid = require('uuid/v1');
+// const storage = require('../storage/data-store.js');
+import storage from './lib/storage/data-store.js';
+
+//const uuid = require('uuid/v1');
+import uuid from 'uuid/v1';
 
 class Note {
   /**
-   * Simple constructor function for our note model
    * @param config
    */
 
@@ -17,8 +19,6 @@ class Note {
   }
 
   /**
-   * Save an instance of a note
-   * Note that it calls on our external storage mechanism to do this operation
    * @returns {*}
    */
   save() {
@@ -26,20 +26,6 @@ class Note {
   }
 
   /**
-   * The functions below are all "static" methods on this model.
-   * Simply put, that means that you can't use them on instances of this model, but
-   * rather use them as top level functions.
-   * i.e.
-   *    This will use the instance method "save" to save the note we just created
-   *    let myNote = new Note({title:'Hi',content:'There'});
-   *    myNote.save();
-   *
-   *    To view a single note you would call the method on the constructor istelf:
-   *    Note.fetchOne(id)
-   *
-   * Note that all of the below methods contain calls on our external storage mechanism
-   * to perform their operations
-   *
    * @returns {*}
    */
 
@@ -62,4 +48,5 @@ class Note {
 
 }
 
-module.exports = Note;
+// module.exports = Note;
+export default Note;

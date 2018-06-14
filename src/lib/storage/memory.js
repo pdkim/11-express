@@ -1,6 +1,8 @@
 'use strict';
 
-const storage = module.exports = {};
+//const storage = module.exports = {};
+const storage = {};
+
 
 const database = {};
 
@@ -33,3 +35,5 @@ storage.delete = (id) => {
     else{reject(`${id} not found`);}
   });
 };
+
+export default storage;
