@@ -81,4 +81,3 @@ Configure the root of your repository with the following files and directories. 
  * `POST`: test 400, it should respond with 'bad request' if no request body was provided or the body was invalid
  * `POST`: test 200, it should respond with the body content for a post request with a valid body
 
-
