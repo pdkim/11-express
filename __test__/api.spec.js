@@ -15,6 +15,14 @@ describe('API module should', () => {
     app.stop();
   });
 
+  it('return 404 status code when passed a non-registered route', () => {
+    return superagent
+      .get('http://localhost:3001/api/v1/pokemon')
+      .catch(res => {
+        expect(res.status).toBe(404);
+      });
+  });
+
   it('return 404 status code when an invalid id is passed', () => {
     return superagent
       .get('http://localhost:3001/api/v1/worker/1223')
