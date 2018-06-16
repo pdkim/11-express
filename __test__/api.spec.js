@@ -16,25 +16,26 @@ describe('API module should', () => {
   });
 
   it('return 404 status code when an invalid id is passed', () => {
-    superagent
+    return superagent
       .get('http://localhost:3001/api/v1/worker/1223')
       .catch(res => {
-        expect(res.statusCode).toBe(404);
+        expect(res.status).toBe(404);
       });
   });
 
-  it('return 400 status code when no id is entered', () => {
+  it('return 400 status code when no id is entered', (done) => {
     superagent
-      .get('http://localhost:3001/api/v1/worker/')
+      .get('http://localhost:3001/api/v1/worker')
       .catch(res => {
-        expect(res.statusCode).toBe(400);
-        expect(res.statusMessage).toBe('Bad Request');
+        expect(res.status).toBe(400);
+        expect(res.response.text).toEqual('Bad Request');
+        done();
       });
   });
 
   it('return 200 status code when a valid id is entered', () => {
     let id;
-    superagent
+    return superagent
       .post('http://localhost:3001/api/v1/worker/')
       .send({
         firstName: 'Phil',
@@ -43,28 +44,27 @@ describe('API module should', () => {
       })
       .then(data => {
         id = data.params.id;
+        return superagent
+          .get(`http://localhost:3001/api/v1/worker/${id}`)
+          .then(res => {
+            expect(res.statusCode).toBe(200);
+          })
+          .catch(res => console.error(res));
       })
       .catch(res => console.error('post failed at ', res));
-
-    superagent
-      .get(`http://localhost:3001/api/v1/worker/${id}`)
-      .then(res => {
-        expect(res.statusCode).toBe(200);
-      })
-      .catch(res => console.error(res));
   });
 
   it('return 400 status code when attempting to post without content', () => {
-    superagent
+    return superagent
       .post('http://localhost:3001/api/v1/worker/')
       .catch(res => {
-        expect(res.statusCode).toBe(400);
-        expect(res.statusMessage).toBe('Bad Request');
+        expect(res.status).toBe(400);
+        expect(res.response.text).toBe('Bad Request');
       });
   });
 
   it('return 200 status code when posting with content', () => {
-    superagent
+    return superagent
       .post('http://localhost:3001/api/v1/worker/')
       .send({
         firstName: 'Phil',

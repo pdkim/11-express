@@ -21,11 +21,6 @@ let serverError = (res, err) => {
   let error = { error: err };
   res.status(404);
   res.json(error);
-  // res.statusCode = 404;
-  // res.statusMessage = 'Not Found';
-  // res.setHeader('Content-Type', 'application/json');
-  // res.write(JSON.stringify(error));
-  // res.end();
 };
 
 
