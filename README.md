@@ -1,9 +1,9 @@
 Travis: 
-Replace this with lab 11's travis
+[![Build Status](https://travis-ci.com/pdkim/11-express.svg?branch=pk11)](https://travis-ci.com/pdkim/11-express)
 
 
 Heroku: 
-Replace this with lab 11's heroku
+https://pk-11-express.herokuapp.com/
 
 
 Github:
