@@ -29,12 +29,6 @@ let serverError = (res, err) => {
   res.end();
 };
 
-//GET ALL
-router.get('/api/v1/worker/', (req, res) => {
-  Worker.fetchAll()
-    .then(data => sendJSON(res, data))
-    .catch(err => serverError(res, err));
-});
 
 //GET ONE
 router.get('/api/v1/worker/:id', (req, res) => {
@@ -44,7 +38,21 @@ router.get('/api/v1/worker/:id', (req, res) => {
       .catch(err => serverError(res, err));
   }
   else {
-    serverError(res, 'Bad Request');
+    serverError(err, 'Not Found');
+  }
+});
+
+//GET ALL
+router.get('/api/v1/worker/', (req, res) => {
+  if (req.params.body === undefined) {
+    res.statusCode = 400;
+    res.statusMessage = 'Bad Request';
+    res.send('Bad Request');
+  }
+  else {
+    Worker.fetchAll()
+      .then(data => sendJSON(res, data))
+      .catch(err => serverError(res, err));
   }
 });
 
@@ -69,12 +77,19 @@ router.delete('/api/v1/worker/:id', (req, res) => {
 
 //POST
 router.post('/api/v1/worker', (req, res) => {
+  if (!req.body) {
+    res.statusCode = 400;
+    res.statusMessage = 'Bad Request';
+    res.write('Bad Request');
+    res.end();
+  }
+  else {
+    let record = new Worker(req.body);
 
-  let record = new Worker(req.body);
-
-  record.save()
-    .then(data => sendJSON(res, data))
-    .catch(console.error);
+    record.save()
+      .then(data => sendJSON(res, data))
+      .catch(console.error);
+  }
 });
 
 
