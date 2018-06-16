@@ -13,20 +13,19 @@ import Worker from '../lib/models/worker.js';
 
 
 let sendJSON = (res, data) => {
-  res.statusCode = 200;
-  res.statusMessage = 'ok';
-  res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(data));
-  res.end();
+  res.status(200);
+  res.json(data);
 };
 
 let serverError = (res, err) => {
   let error = { error: err };
-  res.statusCode = 404;
-  res.statusMessage = 'Not Found';
-  res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(error));
-  res.end();
+  res.status(404);
+  res.json(error);
+  // res.statusCode = 404;
+  // res.statusMessage = 'Not Found';
+  // res.setHeader('Content-Type', 'application/json');
+  // res.write(JSON.stringify(error));
+  // res.end();
 };
 
 
@@ -45,9 +44,7 @@ router.get('/api/v1/worker/:id', (req, res) => {
 //GET ALL
 router.get('/api/v1/worker/', (req, res) => {
   if (req.params.body === undefined) {
-    res.statusCode = 400;
-    res.statusMessage = 'Bad Request';
-    res.send('Bad Request');
+    res.status(400).send('Bad Request');
   }
   else {
     Worker.fetchAll()
@@ -59,9 +56,7 @@ router.get('/api/v1/worker/', (req, res) => {
 //DELETE
 router.delete('/api/v1/worker/:id', (req, res) => {
   if (req.params.id === '' || !req.params.id) {
-    res.statusCode = 400;
-    res.statusMessage = 'Bad Request';
-    res.send('Bad Request');
+    res.status(400).send('Bad Request');
   }
   else {
     Worker.deleteOne(req.params.id)
@@ -77,9 +72,7 @@ router.delete('/api/v1/worker/:id', (req, res) => {
 //POST
 router.post('/api/v1/worker', (req, res) => {
   if (req.body.firstName === undefined && req.body.lastName === undefined && req.body.hourlyWage === undefined) {
-    res.statusCode = 400;
-    res.statusMessage = 'Bad Request';
-    res.send('Bad Request');
+    res.status(400).send('Bad Request');
   }
   else {
     let record = new Worker(req.body);
