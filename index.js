@@ -5,3 +5,5 @@ require('dotenv').config();
 require('babel-register');
 
 require('./src/app.js').start(process.env.PORT);
+
+// require('./src/app.js').stop();

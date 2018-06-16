@@ -38,35 +38,26 @@ router.get('/api/v1/worker/', (req, res) => {
 
 //GET ONE
 router.get('/api/v1/worker/:id', (req, res) => {
-  if (req.param.id === '') {
-    res.statusCode = 400;
-    res.statusMessage = 'Bad Request';
-    res.send('Bad Request');
-    // res.write('Bad Request');
-    // res.end();
-  }
-  else {
-    Worker.findOne(req.param.id)
+  if (req.params.id) {
+    Worker.findOne(req.params.id)
       .then(data => sendJSON(res, data))
       .catch(err => serverError(res, err));
   }
-  // else {
-  //   Worker.fetchAll()
-  //     .then(data => sendJSON(res, data))
-  //     .catch(err => serverError(res, err));
-  // }
+  else {
+    serverError(res, 'Bad Request');
+  }
 });
 
 //DELETE
 router.delete('/api/v1/worker/:id', (req, res) => {
-  if (req.param.id === '' || !req.param.id) {
+  if (req.params.id === '' || !req.params.id) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
     res.write('Bad Request');
     res.end();
   }
   else {
-    Worker.deleteOne(req.param.id)
+    Worker.deleteOne(req.params.id)
       .then(() => {
         res.statusCode = 204;
         res.statusMessage = 'OK';

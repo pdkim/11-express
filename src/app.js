@@ -13,11 +13,12 @@ app.use(router);
 
 let alreadyRunning = false;
 
+let server;
 
 module.exports = {
   start: (port) => {
     if(!alreadyRunning) {
-      app.listen(port, (err) =>{
+      server = app.listen(port, (err) =>{
         if(err) {throw err;}
 
         alreadyRunning = true;
@@ -30,7 +31,7 @@ module.exports = {
   },
 
   stop: () => {
-    app.close( () => {
+    server.close( () => {
       alreadyRunning = false;
       console.log('Server is closed');
     });
