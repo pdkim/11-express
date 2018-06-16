@@ -54,7 +54,7 @@ describe('API module should', () => {
       .catch(res => console.error(res));
   });
 
-  xit('return 400 status code when attempting to post without content', () => {
+  it('return 400 status code when attempting to post without content', () => {
     superagent
       .post('http://localhost:3001/api/v1/worker/')
       .catch(res => {

@@ -61,8 +61,7 @@ router.delete('/api/v1/worker/:id', (req, res) => {
   if (req.params.id === '' || !req.params.id) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
-    res.write('Bad Request');
-    res.end();
+    res.send('Bad Request');
   }
   else {
     Worker.deleteOne(req.params.id)
@@ -77,11 +76,10 @@ router.delete('/api/v1/worker/:id', (req, res) => {
 
 //POST
 router.post('/api/v1/worker', (req, res) => {
-  if (!req.body) {
+  if (req.body.firstName === undefined && req.body.lastName === undefined && req.body.hourlyWage === undefined) {
     res.statusCode = 400;
     res.statusMessage = 'Bad Request';
-    res.write('Bad Request');
-    res.end();
+    res.send('Bad Request');
   }
   else {
     let record = new Worker(req.body);
